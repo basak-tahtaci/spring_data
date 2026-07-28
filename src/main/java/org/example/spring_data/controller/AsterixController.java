@@ -27,6 +27,7 @@ public class AsterixController {
     @GetMapping("/characters")
     public List<AsterixCharacter> getAllCharacters() {
         return service.getAllCharacters();
+
     }
 //    //das gleiche wie unten nur von der datenbank repo die daten genommen
 //    @GetMapping("/characters")
