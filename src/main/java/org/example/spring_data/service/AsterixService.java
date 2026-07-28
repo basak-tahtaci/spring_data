@@ -1,10 +1,12 @@
 package org.example.spring_data.service;
 
+import org.example.spring_data.dto.AsterixCharacterDto;
 import org.example.spring_data.model.AsterixCharacter;
 import org.example.spring_data.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AsterixService {
@@ -28,8 +30,21 @@ public class AsterixService {
 
     // nimmt den asterixcharacter objekt also neuen charakter und speichert es über save in DB, save ist eine methode
     // von springboot
-    public AsterixCharacter saveCharacter(AsterixCharacter character) {
-        return repo.save(character);
+//    public AsterixCharacter saveCharacter(AsterixCharacter character) {
+//        return repo.save(character);
+//    }
+
+    //wie oben
+    public AsterixCharacter saveCharacter(AsterixCharacterDto dto) {
+        String randomId = UUID.randomUUID().toString();
+
+        AsterixCharacter characterToSave = new AsterixCharacter(
+                randomId,
+                dto.name(),
+                dto.age(),
+                dto.profession());
+
+        return repo.save(characterToSave);
     }
 
 

@@ -1,5 +1,6 @@
 package org.example.spring_data.controller;
 
+import org.example.spring_data.dto.AsterixCharacterDto;
 import org.example.spring_data.model.AsterixCharacter;
 import org.example.spring_data.repository.CharacterRepository;
 import org.example.spring_data.service.AsterixService;
@@ -38,7 +39,7 @@ public class AsterixController {
 
     // für post anfragen an http
     @PostMapping("/characters")
-    public AsterixCharacter createCharacter(@RequestBody AsterixCharacter character) {
+    public AsterixCharacter createCharacter(@RequestBody AsterixCharacterDto character) {
         return service.saveCharacter(character);
     }
     // @RequestBody sagt nimm das json das ich body in postman schicke und verwandle es in asterixcharacter objekt um
