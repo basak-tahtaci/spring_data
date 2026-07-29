@@ -13,11 +13,13 @@ public class AsterixService {
 
     // Dependency Injection; wie Mehl vor Brot, Spring injiziert das repo in Service damit Controller zugreift
     private final CharacterRepository repo;
+    private final IdService idService;
 
     // hier passiert die DI; der Konstruktor AsterixService legt fest, wenn jemand ein service objekt erstellen möchte,
     // muss er characterrepo übergeben
-    public AsterixService(CharacterRepository repo) {
+    public AsterixService(CharacterRepository repo, IdService idService) {
         this.repo = repo;
+        this.idService = idService;
     }
     // this.repo = repo;: Hier nimmt die Klasse das von Spring übergebene repo und speichert es in ihrer eigenen
     // Variable private final CharacterRepository repo; ab. Ab diesem Moment kann die gesamte Klasse mit this.repo auf
@@ -36,7 +38,7 @@ public class AsterixService {
 
     //wie oben
     public AsterixCharacter saveCharacter(AsterixCharacterDto dto) {
-        String randomId = UUID.randomUUID().toString();
+        String randomId = idService.randomId();
 
         AsterixCharacter characterToSave = new AsterixCharacter(
                 randomId,
@@ -46,6 +48,8 @@ public class AsterixService {
 
         return repo.save(characterToSave);
     }
+
+
 
 
 }
